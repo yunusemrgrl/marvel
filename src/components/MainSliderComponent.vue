@@ -1,46 +1,14 @@
 <template>
   <div class="slider">
-    <h2 class="slider__title">NETFLIX ORIGINALS</h2>
-    <div class="slider__posters">
+    <h2 class="title">{{ title }}</h2>
+    <div class="posters">
       <img
-        class="slider__posters__poster slider__posters__poster--large"
+        class="poster"
+        :class="thumbLarge ? 'poster-large' : ''"
         src="../assets/small-movie3.jpg"
         alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
-      />
-      <img
-        class="slider__posters__poster slider__posters__poster--large"
-        src="../assets/small-movie3.jpg"
-        alt=""
+        v-for="index in 8"
+        :key="index"
       />
     </div>
   </div>
@@ -49,32 +17,35 @@
 <script>
 export default {
   name: "MainSliderComponent",
-  props: {},
+  props: {
+    title: String,
+    thumbLarge: Boolean,
+  },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .slider {
   color: white;
   margin-left: 20px;
 
-  &__title {
-    margin-left: 20px;
+  .title {
   }
 
-  &__posters {
+  .posters {
     &::-webkit-scrollbar {
       display: none;
     }
 
     display: flex;
+    justify-content: space-between;
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 20px;
     -ms-overflow-style: none;
 
-    &__poster {
-      &--large {
+    .poster {
+      &-large {
         max-height: 250px;
         &:hover {
           transform: scale(1.09);

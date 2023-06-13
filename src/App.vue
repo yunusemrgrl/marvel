@@ -62,7 +62,12 @@ body {
   background-color: #111;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0px;
   padding: 0px;
 }
@@ -76,6 +81,8 @@ nav {
   top: 0;
   justify-content: space-between;
   align-items: center;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
   z-index: 1;
   .netflix-logo {
     width: 80px;
