@@ -8,18 +8,9 @@ export default createStore({
   },
   getters: {
     getComics: (state) => state.comics,
-    getFavorites: (state) => state.favorites,
-    getFavoriteCount: (state) => state.favorites.length,
   },
   mutations: {
     setComics: (state, comics) => (state.comics = comics),
-    addToFavorites: (state, comic) => state.favorites.push(comic),
-    removeFromFavorites: (state, comic) => {
-      const index = state.favorites.findIndex((c) => c.id === comic.id);
-      if (index !== -1) {
-        state.favorites.splice(index, 1);
-      }
-    },
   },
   actions: {
     fetchComics: async (context) => {
@@ -32,12 +23,6 @@ export default createStore({
       } catch (error) {
         console.error("Comic verileri alınırken bir hata oluştu:", error);
       }
-    },
-    addToFavorites: (context, comic) => {
-      context.commit("addToFavorites", comic);
-    },
-    removeFromFavorites: (context, comic) => {
-      context.commit("removeFromFavorites", comic);
     },
   },
   modules: {},
