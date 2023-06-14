@@ -1,26 +1,41 @@
 <template>
   <div class="slider">
-    <h2 class="title">{{ title }}</h2>
+    <h2 class="topic">{{ topic }}</h2>
     <div class="posters">
-      <img
-        class="poster"
-        :class="thumbLarge ? 'poster-large' : ''"
-        src="../assets/small-movie3.jpg"
-        alt=""
-        v-for="index in 8"
-        :key="index"
+      <ComicItem
+        v-for="comic in comics"
+        :key="comic.id"
+        :comic="comic"
+        :thumbLarge="thumbLarge"
       />
     </div>
   </div>
 </template>
 
 <script>
+import ComicItem from "./ComicItem.vue";
+
 export default {
   name: "MainSliderComponent",
   props: {
-    title: String,
+    topic: String,
     thumbLarge: Boolean,
+    comics: Array,
   },
+  data() {
+    return {
+      showTooltip: false,
+    };
+  },
+  methods: {
+    truncateText(text, limit) {
+      if (text && text.length <= limit) {
+        return text;
+      }
+      return text ? text.substring(0, limit) + "..." : "";
+    },
+  },
+  components: { ComicItem },
 };
 </script>
 
@@ -29,7 +44,7 @@ export default {
   color: white;
   margin-left: 20px;
 
-  .title {
+  .topic {
   }
 
   .posters {
@@ -37,29 +52,12 @@ export default {
       display: none;
     }
 
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 20px;
     -ms-overflow-style: none;
-
-    .poster {
-      &-large {
-        max-height: 250px;
-        &:hover {
-          transform: scale(1.09);
-        }
-      }
-      aspect-ratio: 16/9;
-      max-height: 100px;
-      margin-right: 10px;
-      transition: transform 450ms;
-
-      &:hover {
-        transform: scale(1.08);
-      }
-    }
   }
 }
 </style>
