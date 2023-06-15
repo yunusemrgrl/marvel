@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <HeaderComponent />
+    <HeaderComponent :favoriteList="getFavoriteComics" />
     <MainSliderComponent
       v-for="(section, index) in sections"
       :key="index"
@@ -25,10 +25,12 @@ export default {
   computed: {
     ...mapGetters({
       comics: "getComics",
+      getFavoriteComics: "getFavoriteComics",
     }),
   },
   created() {
     this.fetchComics();
+    this.getFavorites();
   },
   data() {
     return {
@@ -80,7 +82,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchComics"]),
+    ...mapActions(["fetchComics", "getFavorites"]),
   },
 };
 </script>

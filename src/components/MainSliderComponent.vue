@@ -17,6 +17,7 @@ import ComicItem from "./ComicItem.vue";
 
 export default {
   name: "MainSliderComponent",
+  components: { ComicItem },
   props: {
     topic: String,
     thumbLarge: Boolean,
@@ -35,17 +36,14 @@ export default {
       return text ? text.substring(0, limit) + "..." : "";
     },
   },
-  components: { ComicItem },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/variables.scss";
 .slider {
-  color: white;
+  color: $quaternary-text;
   margin-left: 20px;
-
-  .topic {
-  }
 
   .posters {
     &::-webkit-scrollbar {

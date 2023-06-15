@@ -5,6 +5,7 @@
         src="../src/assets/netflix-logo.png"
         alt="netflix-logo"
         class="netflix-logo"
+        @click="$router.push('/')"
       />
     </router-link>
     <router-link to="/">
@@ -40,26 +41,28 @@ export default {
       this.isScrolled = scrollPosition > 0;
     },
   },
-  // Diğer bileşen kodları
 };
 </script>
 
 <style lang="scss">
+@import "@/styles/variables.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: $light-text;
 }
 
 * {
   box-sizing: border-box;
+  outline: 0;
+  border: 0;
 }
 
 body {
   margin: 0px 0px;
   padding: 0px;
-  background-color: #111;
+  background-color: $primary-bg;
 }
 
 h1,
@@ -75,15 +78,16 @@ h6 {
 nav {
   display: flex;
   position: fixed;
-  box-sizing: border-box;
   width: 100%;
   padding: 20px;
+  height: 80px;
   top: 0;
   justify-content: space-between;
   align-items: center;
   transition-timing-function: ease-in;
   transition: all 0.5s;
   z-index: 1;
+
   .netflix-logo {
     width: 80px;
     height: 30px;
@@ -96,6 +100,6 @@ nav {
 }
 
 nav.scrolled {
-  background-color: #111;
+  background-color: $primary-bg;
 }
 </style>

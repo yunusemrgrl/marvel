@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="comic-item">
+    <AddFavorite :id="comic.id" />
     <img
+      @click="navigateToDetail"
       class="img"
       :class="thumbLarge ? 'img-large' : ''"
       :src="comic.thumbnail.path + '.' + comic.thumbnail.extension"
       :alt="comic.title"
     />
     <div class="details">
-      <h3 class="title">
+      <h3 class="title" :class="{ 'show-tooltip': showTooltip }">
         {{ showTooltip ? comic.title : truncateText(comic.title || "", 30) }}
       </h3>
       <p
@@ -26,8 +28,11 @@
 </template>
 
 <script>
+import AddFavorite from "./AddFavorite.vue";
+
 export default {
   name: "ComicItem",
+  components: { AddFavorite },
   props: {
     comic: Object,
     thumbLarge: Boolean,
@@ -37,9 +42,7 @@ export default {
       showTooltip: false,
     };
   },
-  mounted() {
-    console.log(this.thumbLarge);
-  },
+  mounted() {},
   methods: {
     truncateText(text, limit) {
       if (text && text.length <= limit) {
@@ -47,55 +50,64 @@ export default {
       }
       return text ? text.substring(0, limit) + "..." : "";
     },
+    navigateToDetail() {
+      this.$router.push("/comic/" + this.comic.id);
+    },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/styles/variables.scss";
 .img {
   &:hover {
     transform: scale(1.08);
   }
 
   aspect-ratio: 16/9;
-  max-height: 100px;
+  max-height: 150px;
   margin-right: 10px;
   transition: transform 450ms;
+  cursor: pointer;
 }
-.img-large {
-  max-height: 250px;
-  &:hover {
-    transform: scale(1.09);
-  }
-}
+.comic-item {
+  position: relative;
+  .img-large {
+    max-height: 250px;
 
-.details {
-  margin-top: 10px;
-  font-weight: bold;
-
-  .title {
-    font-size: 18px;
-    margin-bottom: 5px;
-    padding: 5px;
-    font-size: 16px;
-    color: #ddd;
+    &:hover {
+      transform: scale(1.09);
+    }
   }
 
-  .description {
-    font-size: 14px;
-    padding: 5px;
-    max-height: 80px;
-    color: #888;
-    overflow-y: hidden;
-    transition: max-height 450ms;
-  }
-  .description.show-tooltip {
-    max-height: 120px;
-    overflow-y: scroll;
-  }
+  .details {
+    margin-top: 10px;
+    font-weight: bold;
 
-  .description.show-tooltip::-webkit-scrollbar {
-    display: none;
+    .title {
+      font-size: 16px;
+      margin-bottom: 5px;
+      padding: 5px;
+      color: $quaternary-text;
+      transition: max-height 450ms;
+    }
+
+    .description {
+      font-size: 14px;
+      padding: 5px;
+      max-height: 80px;
+      color: $tertiary-text;
+      overflow-y: hidden;
+      transition: max-height 450ms;
+    }
+    .description.show-tooltip {
+      max-height: 120px;
+      overflow-y: scroll;
+    }
+
+    .description.show-tooltip::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 </style>

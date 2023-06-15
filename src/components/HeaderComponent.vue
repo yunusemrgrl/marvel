@@ -4,7 +4,9 @@
       <p class="banner__content__title">Money Heist</p>
       <div class="banner__content__buttons">
         <button class="banner__content__button">Play</button>
-        <button class="banner__content__button">My List</button>
+        <button class="banner__content__button">
+          My List <span>{{ favoriteList?.length }}</span>
+        </button>
       </div>
       <p class="banner__content__description">
         To carry out the biggest heist in history, a mysterious man called The
@@ -19,17 +21,20 @@
 <script>
 export default {
   name: "HeaderComponent",
-  props: {},
+  props: {
+    favoriteList: Array,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/variables.scss";
+
 .banner {
   position: relative;
   background-image: url("../assets/banner.jpg");
   background-size: cover;
   background-position: center center;
-  color: white;
   object-fit: contain;
   width: 100%;
   height: 448px;
@@ -41,7 +46,6 @@ export default {
 
     &__title {
       margin: 0;
-      font-family: Arial;
       font-size: 48px;
       font-weight: 800;
       padding: 0 0 4px;
@@ -49,28 +53,35 @@ export default {
 
     &__buttons {
       button {
-        background-color: rgba(51, 51, 51, 0.5);
-        outline: 0;
-        border: 0;
+        background-color: rgba($secondary-bg, 0.5);
         border-radius: 3px;
-        color: #ffffff;
         font-size: 13px;
         font-weight: 700;
         margin-right: 16px;
         padding: 8px 32px;
         text-align: center;
+        color: $light-text;
+
+        > span {
+          display: inline-block;
+          text-align: center;
+          margin-left: 8px;
+          padding: 2px 6px;
+          border-radius: 50%;
+          background-color: red;
+          color: $light-text;
+        }
 
         &:hover {
-          color: #000;
+          color: $primary-text;
+          cursor: pointer;
           background-color: #e6e6e6;
-          transition: all 0.2s;
+          transition: all 0.6s;
         }
       }
     }
 
     &__description {
-      color: #ffffff;
-      font-family: Arial;
       font-size: 13px;
       font-weight: 700;
       line-height: 17px;
@@ -85,7 +96,7 @@ export default {
       180deg,
       transparent,
       rgba(37, 37, 37, 0.61),
-      #111
+      $primary-bg
     );
     position: absolute;
     bottom: 0;
