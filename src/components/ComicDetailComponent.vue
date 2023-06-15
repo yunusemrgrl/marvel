@@ -51,16 +51,20 @@ export default {
 .detail {
   h1 {
     margin-bottom: 20px;
+    color: $quaternary-text;
   }
 
   img {
-    max-height: 400px;
-    aspect-ratio: 16/9;
+    max-width: 100%;
+    height: auto;
     margin-bottom: 20px;
+    max-height: 600px;
+    width: auto;
   }
 
   p {
     max-width: 80%;
+    color: $tertiary-text;
   }
 
   .loading {
@@ -82,6 +86,11 @@ export default {
     position: absolute;
     right: 100px;
     top: -10px;
+  }
+  @media (max-width: 768px) {
+    .fav {
+      right: 10px;
+    }
   }
 }
 </style>
