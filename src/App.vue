@@ -86,7 +86,7 @@ nav {
   align-items: center;
   transition-timing-function: ease-in;
   transition: all 0.5s;
-  z-index: 1;
+  z-index: 9;
 
   .netflix-logo {
     width: 80px;
